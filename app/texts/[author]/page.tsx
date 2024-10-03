@@ -2,6 +2,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import TextCard from "@/components/TextCard";
 
 export default function AuthorPage({ params }: { params: { author: string } }) {
@@ -29,7 +30,8 @@ export default function AuthorPage({ params }: { params: { author: string } }) {
 
   return (
     <div className="flex flex-wrap justify-center p-4">
-      <h1 className="w-full text-center text-3xl mb-6 mt-24 ">Works by {params.author}</h1>
+      <Breadcrumb author={params.author} />
+      <h1 className="w-full text-center text-3xl mb-6 ">Works by {params.author}</h1>
       {works.length > 0 ? (
         works.map((work) => (
           <TextCard
