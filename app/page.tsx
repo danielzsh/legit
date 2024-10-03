@@ -1,6 +1,14 @@
+"use client";
 import Image from "next/image";
 
 export default function Home() {
+  let words = "Gallia est omnis divisa in partes tres.";
+  return words.split(/ /g).map(w =>
+    <span onClick={async () => {
+      const response = await fetch(`https://www.latin-is-simple.com/api/vocabulary/search/?query=${w}&forms_only=false`)
+      alert(await response.json())
+    }}>{w + ' '}</span>
+  );
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
