@@ -1,4 +1,3 @@
-import { Word } from '@/components/word';
 import { Text } from '@/components/text';
 import { promises as fs } from 'fs';
 export default async function Page({ params }: { params: { slug: string } }) {

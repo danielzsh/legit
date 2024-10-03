@@ -1,28 +1,28 @@
 "use client";
-import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useState, useEffect } from 'react'
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { useState } from 'react'
 
 type Definition = {
-  id: number,
-  intern_type: string,
+  id?: number,
+  intern_type?: string,
   short_name: string,
-  full_name: string,
-  type: {
+  full_name?: string,
+  type?: {
     name: string,
     label: string
   },
-  translations_unstructured: {
+  translations_unstructured?: {
     en: string,
     de: string
   },
-  url: string
+  url?: string
 }
 
 export function Text({ text }: { text: string }) {
   const emptyDefn = { short_name: 'Loading...' };
-  let [word, setWord] = useState<string | null>(null);
-  let [defn, setDefn] = useState<Definition[]>([emptyDefn]);
-  let [ind, setInd] = useState(0);
+  const [word, setWord] = useState<string | null>(null);
+  const [defn, setDefn] = useState<Definition[]>([emptyDefn]);
+  const [ind, setInd] = useState(0);
   return (
     <>
       {text.split(/ /g).map((w, i) =>
