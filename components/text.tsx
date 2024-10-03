@@ -30,7 +30,7 @@ export function Text({ text }: { text: string }) {
           setInd(0);
           setDefn([emptyDefn]);
           setWord(w);
-          const resp = await fetch(`/defn?query=${w}`);
+          const resp = await fetch(`/api/defn?query=${w}`);
           setDefn(await resp.json());
         }}>{w + ' '}</span>)}
       <Dialog
