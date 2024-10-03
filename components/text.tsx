@@ -1,6 +1,5 @@
 "use client";
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import axios from 'axios';
 import { useState } from 'react'
 
 type Definition = {
