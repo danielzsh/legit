@@ -5,14 +5,14 @@ import { faPlus, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
 
 const TopBar: React.FC = () => {
   return (
-    <div className="relative flex pt-7 justify-between items-center pr-7 bg-gray-50">
+    <div className="relative flex pt-7 justify-between items-center pr-7">
       <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-5">
         <input
           type="text"
-          placeholder="Search for books..."
+          placeholder="Search for texts..."
           className="p-2 pl-4 border border-gray-300 rounded-lg w-96 focus:outline-none"
         />
-        <button className="text-gray-800 py-2 px-3 rounded bg-indigo-200 duration-300 hover:opacity-70">
+        <button className="text-gray-800 py-2 px-3 rounded bg-green-200 duration-300 hover:opacity-70">
           <FontAwesomeIcon icon={faPlus} className="text-xl" />
         </button>
       </div>
