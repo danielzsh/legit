@@ -1,9 +1,6 @@
 "use client";
-import Image from "next/image";
 import TextCard from "@/components/TextCard";
-import { getTexts } from '@/lib/texts';
 import React, { useEffect, useState } from 'react';
-import path from 'path';
 
 export default function Home() {
   const [authors, setAuthors] = useState<string[]>([]);

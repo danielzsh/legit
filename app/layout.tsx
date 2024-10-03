@@ -2,7 +2,6 @@ import { Noto_Serif } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import TopBar from "@/components/TopBar";
-import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 
 export const metadata: Metadata = {

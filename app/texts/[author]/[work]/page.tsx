@@ -1,7 +1,6 @@
 // app/texts/[author]/[work]/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import TextCard from '@/components/TextCard';
 import Breadcrumb from '@/components/Breadcrumb';
 
@@ -19,7 +18,11 @@ export default function WorkPage({ params }: { params: { author: string, work: s
         const data = await response.json();
         setChapters(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
       }
     };
 

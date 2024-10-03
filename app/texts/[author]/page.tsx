@@ -1,7 +1,6 @@
 // app/texts/[author]/page.tsx
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
 import TextCard from "@/components/TextCard";
 
@@ -19,7 +18,11 @@ export default function AuthorPage({ params }: { params: { author: string } }) {
         const data = await response.json();
         setWorks(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
       }
     };
 
