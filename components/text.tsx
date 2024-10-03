@@ -40,11 +40,11 @@ export function Text({ text }: { text: string }) {
         transition
         className="z-50 fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0">
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="space-y-4 border bg-white p-12 rounded-md w-2/4 xl:w-1/3">
+          <DialogPanel className="flex flex-col border bg-white p-12 rounded-md h-2/4 w-2/4 xl:w-1/3">
             <DialogTitle className="font-bold">{defn[ind].short_name}</DialogTitle>
             <p className="italic">{defn[ind]?.full_name}</p>
             <p>{defn[ind]?.translations_unstructured?.en}</p>
-            <div className="flex justify-end align-center select-none">
+            <div className="flex justify-end align-center select-none mt-auto">
               <p className="mr-2">{`${ind + 1}/${defn.length}`}</p>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
                 className="size-6 cursor-pointer"
