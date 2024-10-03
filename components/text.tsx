@@ -1,5 +1,6 @@
 "use client";
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import axios from 'axios';
 import { useState } from 'react'
 
 type Definition = {
@@ -30,9 +31,8 @@ export function Text({ text }: { text: string }) {
           setInd(0);
           setDefn([emptyDefn]);
           setWord(w);
-          const response = await fetch(`https://www.latin-is-simple.com/api/vocabulary/search/?query=${w}&forms_only=false`)
-
-          setDefn(await response.json())
+          const response = await axios.get(`https://www.latin-is-simple.com/api/vocabulary/search/?query=${w}&forms_only=false`)
+          setDefn(response.data);
         }}>{w + ' '}</span>)}
       <Dialog
         open={word != null}
