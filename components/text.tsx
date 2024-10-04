@@ -26,7 +26,7 @@ export function Text({ text }: { text: string }) {
   text.split('\n').map(w => { console.log(w) });
   return (
     <>
-      {text.split('\n').map(line => <div>
+      {text.split('\n').map(line => <div key={line}>
         {line.split(/ /g).map((w, i) =>
           <span className="cursor-pointer" key={i} onClick={async () => {
             setInd(0);
