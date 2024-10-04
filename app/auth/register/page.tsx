@@ -16,7 +16,7 @@ const RegisterPage: React.FC = () => {
     try {
       await signInWithGoogle();
       router.push('/'); // Redirect after successful registration
-    } catch (error) {
+    } catch {
       setIsSigningIn(false);
       setError("Google sign-in failed. Please try again.");
     }
