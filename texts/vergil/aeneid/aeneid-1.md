@@ -15,7 +15,7 @@ lītora, multum ille et terrīs iactātus et altō
 
 vī superum saevae memorem Iūnōnis ob īram;
 
-multa quoque et bellō passus, dum conderet urbem,               5
+multa quoque et bellō passus, dum conderet urbem,
 
 inferretque deōs Latiō, genus unde Latīnum,
 

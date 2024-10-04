@@ -23,16 +23,19 @@ export function Text({ text }: { text: string }) {
   const [word, setWord] = useState<string | null>(null);
   const [defn, setDefn] = useState<Definition[]>([emptyDefn]);
   const [ind, setInd] = useState(0);
+  text.split('\n').map(w => { console.log(w) });
   return (
     <>
-      {text.split(/ /g).map((w, i) =>
-        <span className="cursor-pointer" key={i} onClick={async () => {
-          setInd(0);
-          setDefn([emptyDefn]);
-          setWord(w);
-          const resp = await fetch(`/api/defn?query=${w}`);
-          setDefn(await resp.json());
-        }}>{w + ' '}</span>)}
+      {text.split('\n').map(line => <div>
+        {line.split(/ /g).map((w, i) =>
+          <span className="cursor-pointer" key={i} onClick={async () => {
+            setInd(0);
+            setDefn([emptyDefn]);
+            setWord(w);
+            const resp = await fetch(`/api/defn?query=${w}`);
+            setDefn(await resp.json());
+          }}>{w + ' '}</span>)}
+      </div>)}
       <Dialog
         open={word != null}
         onClose={() => { setWord(null); }}
