@@ -63,11 +63,19 @@ const TopBar: React.FC = () => {
           </>
         ) : (
           // User is not logged in, show Log in button
-          <Link href="/auth/login">
-            <button className="text-gray-800 py-2 px-4 rounded bg-lime-500 text-white duration-300 hover:opacity-80">
-              Log in
-            </button>
-          </Link>
+          <>
+            <Link href="/auth/login">
+              <button className="text-gray-800 py-2 px-4 rounded bg-lime-50 border border-lime-500 text-gray-800 duration-300 hover:bg-lime-100 hover:text-gray-900">
+                Log in
+              </button>
+            </Link>
+            <Link href="/auth/register">
+              <button className="text-gray-800 py-2 px-4 rounded bg-lime-500 text-white duration-300 hover:opacity-80">
+                Register
+              </button>
+            </Link>
+
+          </>
         )}
       </div>
     </div>

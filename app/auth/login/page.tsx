@@ -1,7 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signInWithGoogle } from "@/lib/auth"; // Use the function from lib
 import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseConfig"; // Firebase config
+import Link from 'next/link';
 
 const LogInPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +25,18 @@ const LogInPage: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is already logged in, redirect to homepage
+        router.push('/');
+      }
+    });
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
+  }, [router]);
+
   return (
     <div className="pt-40 flex items-center justify-center">
       <div className="bg-lime-100 p-8 rounded-lg shadow-lg max-w-lg w-full">
@@ -35,11 +50,14 @@ const LogInPage: React.FC = () => {
           <button
             onClick={handleGoogleSignIn}
             disabled={isSigningIn}
-            className="w-36 bg-red-500 duration-300 text-white py-2 px-4 rounded hover:bg-red-400 focus:outline-none focus:shadow-outline"
+            className="w-36 bg-lime-300 duration-300 text-black py-2 px-4 rounded hover:bg-lime-200 focus:outline-none focus:shadow-outline"
           >
             {isSigningIn ? 'Logging in...' : 'With Google'}
           </button>
         </div>
+        <p className="text-sm mt-5 text-gray-600 text-center">
+          Need an account? <Link href="/auth/register" className="text-lime-600 hover:underline">Register</Link>
+        </p>
       </div>
     </div>
   );

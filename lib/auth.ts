@@ -1,13 +1,38 @@
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from './firebaseConfig'; // Ensure firebaseConfig is correctly set up
+import { db, auth } from "@/lib/firebaseConfig"; // Your Firebase auth setup
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
-// A function to handle Google Sign-In
 export const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
-  } catch (error) {
-    console.error('Error during Google sign-in:', error);
-    throw error;
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
+
+  const user = result.user;
+  const userDocRef = doc(db, "users", user.uid);
+  const userDoc = await getDoc(userDocRef);
+
+  if (userDoc.exists()) {
+    return { user };
+  } else {
+    throw new Error("Account not found. Please register first.");
   }
+};
+
+// Complete registration and save to Firestore
+export const signUpWithGoogle = async (user: any, username: string) => {
+  const userDocRef = doc(db, "users", user.uid);
+  await setDoc(userDocRef, {
+    email: user.email,
+    username,
+    createdAt: new Date(),
+    words: [],
+    texts: [],
+    translations: [],
+  });
+};
+
+export const checkUsernameExists = async (username: string): Promise<boolean> => {
+  const q = query(collection(db, "users"), where("username", "==", username));
+  const querySnapshot = await getDocs(q);
+
+  return !querySnapshot.empty; // If querySnapshot is not empty, the username already exists
 };
