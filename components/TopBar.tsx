@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faUser, faCog } from "@fortawesome/free-solid-svg-icons";
 
 const TopBar: React.FC = () => {
   return (
@@ -19,10 +19,16 @@ const TopBar: React.FC = () => {
 
       <div className="flex space-x-6 ml-auto">
         <Link href="/profile">
-          <FontAwesomeIcon icon={faUser} className="text-2xl duration duration-300 hover:opacity-70 text-gray-800" />
+          <FontAwesomeIcon
+            icon={faUser}
+            className="text-2xl duration duration-300 hover:opacity-70 text-gray-800"
+          />
         </Link>
         <Link href="/settings">
-          <FontAwesomeIcon icon={faCog} className="text-2xl duration duratino-300 hover:opacity-70 text-gray-800" />
+          <FontAwesomeIcon
+            icon={faCog}
+            className="text-2xl duration duratino-300 hover:opacity-70 text-gray-800"
+          />
         </Link>
       </div>
     </div>

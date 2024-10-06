@@ -12,10 +12,10 @@ const LogInPage: React.FC = () => {
   const handleGoogleSignIn = async () => {
     setIsSigningIn(true);
     setError(null);
-    
+
     try {
       await signInWithGoogle();
-      router.push('/'); // Redirect after successful sign-in
+      router.push("/"); // Redirect after successful sign-in
     } catch {
       setIsSigningIn(false);
       setError("Google sign-in failed. Please try again.");
@@ -37,7 +37,7 @@ const LogInPage: React.FC = () => {
             disabled={isSigningIn}
             className="w-36 bg-red-500 duration-300 text-white py-2 px-4 rounded hover:bg-red-400 focus:outline-none focus:shadow-outline"
           >
-            {isSigningIn ? 'Logging in...' : 'With Google'}
+            {isSigningIn ? "Logging in..." : "With Google"}
           </button>
         </div>
       </div>

@@ -68,6 +68,7 @@ export function Text({ text }: { text: string }) {
                 const defnInfo = docSnap.exists() ? docSnap.data() : {};
                 if (defnInfo) {
                   console.log(defn);
+                  // sort definitions by frequency
                   defn.sort(
                     (a: Definition, b: Definition) =>
                       freq(defnInfo, b) - freq(defnInfo, a),

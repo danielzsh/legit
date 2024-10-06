@@ -1,7 +1,7 @@
 ---
-title: "Aeneid Book 1 Lines 1-30" 
-date: "2024-08-22 6:32PM" 
-description: "Introduction" 
+title: "Aeneid Book 1 Lines 1-30"
+date: "2024-08-22 6:32PM"
+description: "Introduction"
 litperiod: "Augustan"
 author: "Vergil"
 type: "Epic Poetry"

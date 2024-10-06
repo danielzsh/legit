@@ -1,5 +1,5 @@
 // components/TextCard.tsx
-import Link from 'next/link';
+import Link from "next/link";
 
 interface TextCardProps {
   title: string;

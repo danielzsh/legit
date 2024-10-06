@@ -1,7 +1,7 @@
 // app/texts/[author]/page.tsx
-'use client';
-import { useEffect, useState } from 'react';
-import Breadcrumb from '@/components/Breadcrumb';
+"use client";
+import { useEffect, useState } from "react";
+import Breadcrumb from "@/components/Breadcrumb";
 import TextCard from "@/components/TextCard";
 
 export default function AuthorPage({ params }: { params: { author: string } }) {
@@ -13,7 +13,7 @@ export default function AuthorPage({ params }: { params: { author: string } }) {
       try {
         const response = await fetch(`/api/texts/author/${params.author}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch works');
+          throw new Error("Failed to fetch works");
         }
         const data = await response.json();
         setWorks(data);
@@ -21,7 +21,7 @@ export default function AuthorPage({ params }: { params: { author: string } }) {
         if (error instanceof Error) {
           setError(error.message);
         } else {
-          setError('An unknown error occurred');
+          setError("An unknown error occurred");
         }
       }
     };
@@ -34,7 +34,9 @@ export default function AuthorPage({ params }: { params: { author: string } }) {
   return (
     <div className="flex flex-wrap justify-center p-4">
       <Breadcrumb author={params.author} />
-      <h1 className="w-full text-center text-3xl mb-6 ">Works by {params.author}</h1>
+      <h1 className="w-full text-center text-3xl mb-6 ">
+        Works by {params.author}
+      </h1>
       {works.length > 0 ? (
         works.map((work) => (
           <TextCard

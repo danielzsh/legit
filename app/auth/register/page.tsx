@@ -12,10 +12,10 @@ const RegisterPage: React.FC = () => {
   const handleGoogleRegister = async () => {
     setIsSigningIn(true);
     setError(null);
-    
+
     try {
       await signInWithGoogle();
-      router.push('/'); // Redirect after successful registration
+      router.push("/"); // Redirect after successful registration
     } catch {
       setIsSigningIn(false);
       setError("Google sign-in failed. Please try again.");
@@ -37,7 +37,7 @@ const RegisterPage: React.FC = () => {
             disabled={isSigningIn}
             className="w-36 bg-red-500 text-white duration-300 py-2 px-4 rounded hover:bg-red-400 focus:outline-none focus:shadow-outline"
           >
-            {isSigningIn ? 'Signing in...' : 'With Google'}
+            {isSigningIn ? "Signing in..." : "With Google"}
           </button>
         </div>
       </div>
