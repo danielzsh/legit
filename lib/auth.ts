@@ -40,9 +40,26 @@ export const signUpWithGoogle = async (user: User, username: string) => {
 
 export const registerWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
-  const { user } = result;
-  return { user };
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Check if the user's Firestore document exists
+    const userDocRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (!userDoc.exists()) {
+      console.log("User doesn't exist in Firestore");
+      return { user };
+    } else {
+      console.log("User exists already, log in.");
+      await signOut(auth);
+      throw new Error("User exists already, please log in");
+    }
+  } catch (error) {
+    console.error("Error during Google Sign-In:", error);
+    throw error;
+  }
 };
 
 export const checkUsernameExists = async (username: string): Promise<boolean> => {

@@ -19,7 +19,6 @@ const RegisterPage: React.FC = () => {
     try {
       const { user } = await registerWithGoogle(); // Sign in with Google, which returns a user object
 
-      // Now check if the user already exists in Firestore
       const userExists = await checkUserExists(user.uid);
 
       if (userExists) {
@@ -30,9 +29,10 @@ const RegisterPage: React.FC = () => {
         // If the user does not exist, allow them to complete registration
         setUser(user);
       }
-    } catch {
+    } catch (error) {
       setIsSigningIn(false);
-      setError("Google sign-in failed. Please try again.");
+      setError((error as Error).message);
+      //setError("Google sign-in failed. Please try again.");
     }
   };
 
