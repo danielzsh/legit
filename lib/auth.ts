@@ -13,45 +13,17 @@ export const signInWithGoogle = async () => {
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
-      // User exists in Firestore, proceed with login
       console.log("User exists in Firestore");
-      return { user }; // User is signed in and exists in Firestore
+      return { user };
     } else {
-      // User doesn't exist in Firestore, sign them out
       console.log("User does not exist in Firestore. Signing out.");
-      await signOut(auth); // Log out the user immediately
+      await signOut(auth);
       throw new Error("Account not found in Firestore. Please register first.");
     }
   } catch (error) {
     console.error("Error during Google Sign-In:", error);
     throw error; // Re-throw the error to handle it in your UI
   }
-  /*const result = await signInWithPopup(auth, provider);
-
-  const user = result.user;
-  const userDocRef = doc(db, "users", user.uid);
-  const userDoc = await getDoc(userDocRef);
-
-  console.log(userDoc);
-  try {
-    const userDoc = await getDoc(userDocRef);
-    if (userDoc.exists()) {
-      console.log("Document exists:", userDoc.exists());
-      return { user };
-    } else {
-      console.log("Document does not exist.");
-      signOut(auth);
-      throw new Error("Account not found. Please register first.");
-    }
-  } catch (error) {
-    console.error("Error getting document:", error);
-  }
-  /*  if (userDoc.exists()) {
-    console.log(userDoc.exists());
-    return { user };
-  } else {
-    throw new Error("Account not found. Please register first.");
-  }*/
 };
 
 export const signUpWithGoogle = async (user: User, username: string) => {
