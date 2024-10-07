@@ -1,9 +1,9 @@
 // app/api/texts/author/route.ts
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
-const textsDirectory = path.join(process.cwd(), 'texts');
+const textsDirectory = path.join(process.cwd(), "texts");
 
 export async function GET() {
   try {
@@ -14,7 +14,10 @@ export async function GET() {
 
     return NextResponse.json(authors);
   } catch (error) {
-    console.error('Error reading authors:', error);
-    return NextResponse.json({ error: 'Failed to load authors' }, { status: 500 });
+    console.error("Error reading authors:", error);
+    return NextResponse.json(
+      { error: "Failed to load authors" },
+      { status: 500 },
+    );
   }
 }

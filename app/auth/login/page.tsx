@@ -65,7 +65,7 @@ const LogInPage: React.FC = () => {
             disabled={isSigningIn}
             className="w-36 bg-lime-300 duration-300 text-black py-2 px-4 rounded hover:bg-lime-200 focus:outline-none focus:shadow-outline"
           >
-            {isSigningIn ? 'Logging in...' : 'With Google'}
+            {isSigningIn ? "Logging in..." : "With Google"}
           </button>
         </div>
         <p className="text-sm mt-5 text-gray-600 text-center">
