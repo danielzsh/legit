@@ -17,7 +17,6 @@ export const signInWithGoogle = async () => {
   }
 };
 
-// Complete registration and save to Firestore
 export const signUpWithGoogle = async (user: User, username: string) => {
   const userDocRef = doc(db, "users", user.uid);
   await setDoc(userDocRef, {
@@ -28,6 +27,13 @@ export const signUpWithGoogle = async (user: User, username: string) => {
     texts: [],
     translations: [],
   });
+};
+
+export const registerWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
+  const { user } = result;
+  return { user };
 };
 
 export const checkUsernameExists = async (username: string): Promise<boolean> => {
