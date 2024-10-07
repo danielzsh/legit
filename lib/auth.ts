@@ -1,5 +1,5 @@
 import { db, auth } from "@/lib/firebaseConfig"; // Your Firebase auth setup
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, User, signInWithPopup } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 export const signInWithGoogle = async () => {
@@ -18,7 +18,7 @@ export const signInWithGoogle = async () => {
 };
 
 // Complete registration and save to Firestore
-export const signUpWithGoogle = async (user: any, username: string) => {
+export const signUpWithGoogle = async (user: User, username: string) => {
   const userDocRef = doc(db, "users", user.uid);
   await setDoc(userDocRef, {
     email: user.email,
@@ -35,4 +35,10 @@ export const checkUsernameExists = async (username: string): Promise<boolean> =>
   const querySnapshot = await getDocs(q);
 
   return !querySnapshot.empty; // If querySnapshot is not empty, the username already exists
+};
+
+export const checkUserExists = async (uid: string): Promise<boolean> => {
+  const db = getFirestore(); // Initialize Firestore
+  const userDoc = await getDoc(doc(db, "users", uid)); // Get the user document by uid
+  return userDoc.exists(); // Return true if the user exists, false otherwise
 };

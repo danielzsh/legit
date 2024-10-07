@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faUser, faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { faPlus, faUser, faCog } from "@fortawesome/free-solid-svg-icons";
+import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebaseConfig"; // Import your Firebase config
 
 const TopBar: React.FC = () => {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Listen for auth state changes
