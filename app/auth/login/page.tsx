@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { signInWithGoogle } from "@/lib/auth"; // Use the function from lib
+import { signInWithGoogle,checkUserExists } from "@/lib/auth"; // Use the function from lib
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseConfig"; // Firebase config
 import Link from 'next/link';
 
@@ -15,21 +15,34 @@ const LogInPage: React.FC = () => {
   const handleGoogleSignIn = async () => {
     setIsSigningIn(true);
     setError(null);
-    
+  
     try {
-      await signInWithGoogle();
-      router.push('/'); // Redirect after successful sign-in
+      const { user } = await signInWithGoogle();
+      const userExists = await checkUserExists(user.uid);
+      if (userExists) {
+        router.push('/');
+      } else {
+        setError("User does not exist. Please register first.");
+        setIsSigningIn(false);
+        await signOut(auth);
+      }
     } catch {
       setIsSigningIn(false);
-      setError("Google sign-in failed. Please try again.");
+      //setError("Google sign-in failed. Please try again.");
     }
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // User is already logged in, redirect to homepage
-        router.push('/');
+        const userExists = await checkUserExists(user.uid);
+        if (userExists) {
+          router.push('/');
+        } else {
+          setError("User does not exist. Please register first.");
+          setIsSigningIn(false);
+          await signOut(auth);
+        }
       }
     });
 
